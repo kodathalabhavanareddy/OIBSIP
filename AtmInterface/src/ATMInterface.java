@@ -19,41 +19,37 @@ public class ATMInterface {
 
         while (true) {
             System.out.println("\nHello, " + username + "! Please select an option:");
-            System.out.println("1. Check Balance");
-            System.out.println("2. Deposit");
-            System.out.println("3. Withdraw");
+            System.out.println("1. Transaction history");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Deposit");
             System.out.println("4. Transfer");
-            System.out.println("5. Transaction History");
-            System.out.println("6. Exit");
+            System.out.println("5. Quit");
 
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    checkBalance();
-                    break;
+                    showTransactionHistory();
+                    break;               
                 case 2:
-                    System.out.print("Enter amount to deposit: ");
-                    double depositAmount = scanner.nextDouble();
-                    deposit(depositAmount);
-                    break;
-                case 3:
                     System.out.print("Enter amount to withdraw: ");
                     double withdrawAmount = scanner.nextDouble();
                     withdraw(withdrawAmount);
                     break;
+                case 3:
+                    System.out.print("Enter amount to deposit: ");
+                    double depositAmount = scanner.nextDouble();
+                    deposit(depositAmount);
+                    break;
                 case 4:
                     System.out.print("Enter recipient's username: ");
-                    scanner.nextLine(); // Clear the newline character
+                    scanner.nextLine(); 
                     String recipient = scanner.nextLine();
                     System.out.print("Enter amount to transfer: ");
                     double transferAmount = scanner.nextDouble();
                     transfer(recipient, transferAmount);
-                    break;
+                    break;                
                 case 5:
-                    showTransactionHistory();
-                    break;
-                case 6:
                     System.out.println("Thank you for using the ATM. Goodbye!");
                     System.exit(0);
                     break;
@@ -63,19 +59,12 @@ public class ATMInterface {
             }
         }
     }
-
-    private static void checkBalance() {
-        System.out.println("Your balance is: $" + balance);
-        transactionHistory.add("Balance check: $" + balance);
-    }
-
-    private static void deposit(double amount) {
-        balance += amount;
-        System.out.println("Deposited: $" + amount);
-        System.out.println("New balance is: $" + balance);
-        transactionHistory.add("Deposit: $" + amount);
-    }
-
+    private static void showTransactionHistory() {
+        System.out.println("Transaction History:");
+        for (String transaction : transactionHistory) {
+            System.out.println(transaction);
+        }
+    }   
     private static void withdraw(double amount) {
         if (amount > balance) {
             System.out.println("Insufficient funds. Withdrawal canceled.");
@@ -85,6 +74,12 @@ public class ATMInterface {
             System.out.println("New balance is: $" + balance);
             transactionHistory.add("Withdrawal: $" + amount);
         }
+    }
+    private static void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: $" + amount);
+        System.out.println("New balance is: $" + balance);
+        transactionHistory.add("Deposit: $" + amount);
     }
 
     private static void transfer(String recipient, double amount) {
@@ -98,10 +93,5 @@ public class ATMInterface {
         }
     }
 
-    private static void showTransactionHistory() {
-        System.out.println("Transaction History:");
-        for (String transaction : transactionHistory) {
-            System.out.println(transaction);
-        }
-    }
+    
 }
