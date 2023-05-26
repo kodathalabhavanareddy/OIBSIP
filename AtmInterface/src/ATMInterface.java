@@ -67,7 +67,7 @@ public class ATMInterface {
     }   
     private static void withdraw(double amount) {
         if (amount > balance) {
-            System.out.println("Insufficient funds. Withdrawal canceled.");
+            System.out.println("Insufficient balance!!");
         } else {
             balance -= amount;
             System.out.println("Withdrawn: $" + amount);
@@ -84,7 +84,7 @@ public class ATMInterface {
 
     private static void transfer(String recipient, double amount) {
         if (amount > balance) {
-            System.out.println("Insufficient funds. Transfer canceled.");
+            System.out.println("Insufficient balance!!");
         } else {
             balance -= amount;
             System.out.println("Transferred: $" + amount + " to " + recipient);
