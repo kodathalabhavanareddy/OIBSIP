@@ -1,52 +1,46 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public class ATMInterface {
-    private static double balance = 0; // Initial balance
+public class ATMInterface {    
     private static List<String> transactionHistory = new ArrayList<>();
+    private static double balance = 0; 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
+        Scanner s = new Scanner(System.in);
         System.out.println("Welcome to the ATM!");
-
         System.out.print("Enter your username: ");
-        String username = scanner.nextLine();
-
+        String username = s.nextLine();
         System.out.print("Enter your ATM pin ID: ");
-        String pinId = scanner.nextLine();
+        String pin = s.nextLine();
 
         while (true) {
-            System.out.println("\nHello, " + username + "! Please select an option:");
+            System.out.println("\nWelcome, " + username + "! Please choose an option:");
             System.out.println("1. Transaction history");
             System.out.println("2. Withdraw");
             System.out.println("3. Deposit");
             System.out.println("4. Transfer");
             System.out.println("5. Quit");
-
-            int choice = scanner.nextInt();
+            int choice = s.nextInt();
 
             switch (choice) {
                 case 1:
-                    showTransactionHistory();
+                    transactionHistory();
                     break;               
                 case 2:
                     System.out.print("Enter amount to withdraw: ");
-                    double withdrawAmount = scanner.nextDouble();
+                    double withdrawAmount = s.nextDouble();
                     withdraw(withdrawAmount);
                     break;
                 case 3:
                     System.out.print("Enter amount to deposit: ");
-                    double depositAmount = scanner.nextDouble();
+                    double depositAmount = s.nextDouble();
                     deposit(depositAmount);
                     break;
                 case 4:
                     System.out.print("Enter recipient's username: ");
-                    scanner.nextLine(); 
-                    String recipient = scanner.nextLine();
+                    s.nextLine(); 
+                    String recipient = s.nextLine();
                     System.out.print("Enter amount to transfer: ");
-                    double transferAmount = scanner.nextDouble();
+                    double transferAmount = s.nextDouble();
                     transfer(recipient, transferAmount);
                     break;                
                 case 5:
@@ -59,7 +53,7 @@ public class ATMInterface {
             }
         }
     }
-    private static void showTransactionHistory() {
+    private static void transactionHistory() {
         System.out.println("Transaction History:");
         for (String transaction : transactionHistory) {
             System.out.println(transaction);
